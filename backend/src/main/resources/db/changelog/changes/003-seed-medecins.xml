@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="003-seed-medecins" author="cabinet-medical">
+        <comment>Insertion des médecins de test</comment>
+
+        <!-- Médecins en Médecine Générale (specialite_id = 1) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Dupont"/>
+            <column name="prenom" value="Jean"/>
+            <column name="email" value="jean.dupont@cabinet.fr"/>
+            <column name="telephone" value="0123456789"/>
+            <column name="numero_ordre" value="ORD-00001"/>
+            <column name="specialite_id" valueNumeric="1"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Martin"/>
+            <column name="prenom" value="Sophie"/>
+            <column name="email" value="sophie.martin@cabinet.fr"/>
+            <column name="telephone" value="0123456790"/>
+            <column name="numero_ordre" value="ORD-00002"/>
+            <column name="specialite_id" valueNumeric="1"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Médecins en Cardiologie (specialite_id = 2) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Bernard"/>
+            <column name="prenom" value="Pierre"/>
+            <column name="email" value="pierre.bernard@cabinet.fr"/>
+            <column name="telephone" value="0123456791"/>
+            <column name="numero_ordre" value="ORD-00003"/>
+            <column name="specialite_id" valueNumeric="2"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Dubois"/>
+            <column name="prenom" value="Marie"/>
+            <column name="email" value="marie.dubois@cabinet.fr"/>
+            <column name="telephone" value="0123456792"/>
+            <column name="numero_ordre" value="ORD-00004"/>
+            <column name="specialite_id" valueNumeric="2"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Médecins en Dermatologie (specialite_id = 3) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Petit"/>
+            <column name="prenom" value="Luc"/>
+            <column name="email" value="luc.petit@cabinet.fr"/>
+            <column name="telephone" value="0123456793"/>
+            <column name="numero_ordre" value="ORD-00005"/>
+            <column name="specialite_id" valueNumeric="3"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Robert"/>
+            <column name="prenom" value="Anne"/>
+            <column name="email" value="anne.robert@cabinet.fr"/>
+            <column name="telephone" value="0123456794"/>
+            <column name="numero_ordre" value="ORD-00006"/>
+            <column name="specialite_id" valueNumeric="3"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Médecins en Pédiatrie (specialite_id = 4) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Richard"/>
+            <column name="prenom" value="Paul"/>
+            <column name="email" value="paul.richard@cabinet.fr"/>
+            <column name="telephone" value="0123456795"/>
+            <column name="numero_ordre" value="ORD-00007"/>
+            <column name="specialite_id" valueNumeric="4"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Moreau"/>
+            <column name="prenom" value="Julie"/>
+            <column name="email" value="julie.moreau@cabinet.fr"/>
+            <column name="telephone" value="0123456796"/>
+            <column name="numero_ordre" value="ORD-00008"/>
+            <column name="specialite_id" valueNumeric="4"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Médecins en Ophtalmologie (specialite_id = 5) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Simon"/>
+            <column name="prenom" value="Thomas"/>
+            <column name="email" value="thomas.simon@cabinet.fr"/>
+            <column name="telephone" value="0123456797"/>
+            <column name="numero_ordre" value="ORD-00009"/>
+            <column name="specialite_id" valueNumeric="5"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Laurent"/>
+            <column name="prenom" value="Emma"/>
+            <column name="email" value="emma.laurent@cabinet.fr"/>
+            <column name="telephone" value="0123456798"/>
+            <column name="numero_ordre" value="ORD-00010"/>
+            <column name="specialite_id" valueNumeric="5"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Médecins en ORL (specialite_id = 6) -->
+        <insert tableName="medecins">
+            <column name="nom" value="Michel"/>
+            <column name="prenom" value="Nicolas"/>
+            <column name="email" value="nicolas.michel@cabinet.fr"/>
+            <column name="telephone" value="0123456799"/>
+            <column name="numero_ordre" value="ORD-00011"/>
+            <column name="specialite_id" valueNumeric="6"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="medecins">
+            <column name="nom" value="Garcia"/>
+            <column name="prenom" value="Camille"/>
+            <column name="email" value="camille.garcia@cabinet.fr"/>
+            <column name="telephone" value="0123456800"/>
+            <column name="numero_ordre" value="ORD-00012"/>
+            <column name="specialite_id" valueNumeric="6"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
+

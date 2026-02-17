@@ -1,0 +1,365 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Microservice Gestion Cabinet Médical",
+    "description": "API REST pour la gestion des médecins d'un cabinet médical. Ce microservice expose les endpoints permettant au frontend d'interagir avec les données des médecins et leurs spécialités (liste, détails, recherche, filtrage). Toutes les réponses sont paginées pour optimiser les performances.",
+    "contact": {
+      "name": "Équipe Cabinet Médical - Microservices",
+      "url": "https://www.cabinetmedical.fr",
+      "email": "contact@cabinetmedical.fr"
+    },
+    "license": {
+      "name": "Propriétaire - Cabinet Médical",
+      "url": "https://www.cabinetmedical.fr/terms"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Serveur de développement local"
+    },
+    {
+      "url": "https://api-cabinet.medical.com",
+      "description": "Serveur de production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Médecins API",
+      "description": "API REST pour la gestion des médecins du cabinet médical - Microservice"
+    }
+  ],
+  "paths": {
+    "/medecin/allMedecins": {
+      "get": {
+        "tags": [
+          "Médecins API"
+        ],
+        "summary": "Récupérer tous les médecins avec pagination et tri",
+        "description": "Endpoint REST API pour récupérer la liste paginée de tous les médecins avec leurs spécialités. Retourne un objet paginé avec la liste des médecins, le nombre de pages, le nombre total d'éléments et les informations de navigation. Supporte le tri par les champs de la table médecin.",
+        "operationId": "getAllMedecins",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Numéro de la page (commence à 0)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0,
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Nombre d'éléments par page (taille)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "example": 10
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Champ pour le tri (nom, prenom, numeroOrdre, email, telephone, specialite)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "nom",
+              "enum": [
+                "nom",
+                "prenom",
+                "numeroOrdre",
+                "email",
+                "telephone",
+                "specialite"
+              ]
+            },
+            "example": "nom"
+          },
+          {
+            "name": "sortDirection",
+            "in": "query",
+            "description": "Direction du tri (asc ou desc)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "example": "asc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des médecins récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseMedecinDTO"
+                },
+                "example": {
+                  "content": [
+                    {
+                      "id": 1,
+                      "nom": "Dupont",
+                      "prenom": "Jean",
+                      "email": "jean.dupont@cabinet.fr",
+                      "telephone": "0123456789",
+                      "numeroOrdre": "ORD-00001",
+                      "specialite": {
+                        "id": 1,
+                        "nom": "Médecine Générale",
+                        "description": "Médecin généraliste pour consultations générales"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "nom": "Martin",
+                      "prenom": "Sophie",
+                      "email": "sophie.martin@cabinet.fr",
+                      "telephone": "0123456790",
+                      "numeroOrdre": "ORD-00002",
+                      "specialite": {
+                        "id": 1,
+                        "nom": "Médecine Générale",
+                        "description": "Médecin généraliste pour consultations générales"
+                      }
+                    }
+                  ],
+                  "pageNumber": 0,
+                  "pageSize": 10,
+                  "totalElements": 50,
+                  "totalPages": 5,
+                  "first": true,
+                  "last": false,
+                  "empty": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètres de requête invalides",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "timestamp": "2026-02-17T20:30:00",
+                  "status": 400,
+                  "error": "Bad Request",
+                  "message": "Le numéro de page ne peut pas être négatif",
+                  "path": "/medecin/allMedecins"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PageResponseMedecinDTO": {
+        "type": "object",
+        "description": "Réponse paginée contenant la liste des médecins",
+        "required": [
+          "content",
+          "pageNumber",
+          "pageSize",
+          "totalElements",
+          "totalPages"
+        ],
+        "properties": {
+          "content": {
+            "type": "array",
+            "description": "Liste des médecins de la page courante",
+            "items": {
+              "$ref": "#/components/schemas/MedecinDTO"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Numéro de la page courante (commence à 0)",
+            "example": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Nombre d'éléments par page",
+            "example": 10
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Nombre total d'éléments",
+            "example": 50
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Nombre total de pages",
+            "example": 5
+          },
+          "first": {
+            "type": "boolean",
+            "description": "Indique si c'est la première page",
+            "example": true
+          },
+          "last": {
+            "type": "boolean",
+            "description": "Indique si c'est la dernière page",
+            "example": false
+          },
+          "empty": {
+            "type": "boolean",
+            "description": "Indique si la page est vide",
+            "example": false
+          }
+        }
+      },
+      "MedecinDTO": {
+        "type": "object",
+        "description": "Objet Médecin retourné par l'API",
+        "required": [
+          "id",
+          "nom",
+          "prenom",
+          "email",
+          "telephone",
+          "numeroOrdre",
+          "specialite"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Identifiant unique du médecin",
+            "example": 1
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom du médecin",
+            "example": "Dupont"
+          },
+          "prenom": {
+            "type": "string",
+            "description": "Prénom du médecin",
+            "example": "Jean"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Adresse email du médecin",
+            "example": "jean.dupont@cabinet.fr"
+          },
+          "telephone": {
+            "type": "string",
+            "description": "Numéro de téléphone du médecin",
+            "example": "0123456789"
+          },
+          "numeroOrdre": {
+            "type": "string",
+            "description": "Numéro d'ordre professionnel du médecin",
+            "example": "ORD-00001"
+          },
+          "specialite": {
+            "$ref": "#/components/schemas/SpecialiteDTO",
+            "description": "Spécialité médicale du médecin"
+          }
+        }
+      },
+      "SpecialiteDTO": {
+        "type": "object",
+        "description": "Objet Spécialité médicale retourné par l'API",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Identifiant unique de la spécialité",
+            "example": 1
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom de la spécialité médicale",
+            "example": "Médecine Générale"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description de la spécialité médicale",
+            "example": "Médecin généraliste pour consultations générales"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Objet d'erreur standard",
+        "required": [
+          "timestamp",
+          "status",
+          "error",
+          "message",
+          "path"
+        ],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de l'erreur",
+            "example": "2026-02-17T20:30:00"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Code HTTP de l'erreur",
+            "example": 404
+          },
+          "error": {
+            "type": "string",
+            "description": "Type d'erreur",
+            "example": "Not Found"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message d'erreur détaillé",
+            "example": "Médecin non trouvé(e) avec id: '999'"
+          },
+          "path": {
+            "type": "string",
+            "description": "Chemin de la requête",
+            "example": "/medecin/allMedecins/999"
+          }
+        }
+      }
+    }
+  }
+}
+
