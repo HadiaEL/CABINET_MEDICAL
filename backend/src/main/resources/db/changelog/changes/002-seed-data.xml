@@ -115,73 +115,73 @@
         <comment>Insertion des heures de la journée (08:00 à 19:00 par heure)</comment>
 
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="08:00:00"/>
+            <column name="heure" value="08:00:00"/>
             <column name="libelle" value="08:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="09:00:00"/>
+            <column name="heure" value="09:00:00"/>
             <column name="libelle" value="09:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="10:00:00"/>
+            <column name="heure" value="10:00:00"/>
             <column name="libelle" value="10:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="11:00:00"/>
+            <column name="heure" value="11:00:00"/>
             <column name="libelle" value="11:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="12:00:00"/>
+            <column name="heure" value="12:00:00"/>
             <column name="libelle" value="12:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="13:00:00"/>
+            <column name="heure" value="13:00:00"/>
             <column name="libelle" value="13:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="14:00:00"/>
+            <column name="heure" value="14:00:00"/>
             <column name="libelle" value="14:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="15:00:00"/>
+            <column name="heure" value="15:00:00"/>
             <column name="libelle" value="15:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="16:00:00"/>
+            <column name="heure" value="16:00:00"/>
             <column name="libelle" value="16:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="17:00:00"/>
+            <column name="heure" value="17:00:00"/>
             <column name="libelle" value="17:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="18:00:00"/>
+            <column name="heure" value="18:00:00"/>
             <column name="libelle" value="18:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="heures_jour">
-            <column name="heure" valueDate="19:00:00"/>
+            <column name="heure" value="19:00:00"/>
             <column name="libelle" value="19:00"/>
             <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
             <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>

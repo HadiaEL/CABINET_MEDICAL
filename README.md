@@ -1,6 +1,8 @@
 # Cabinet Médical
 
-Application de gestion de cabinet médical avec architecture monorepo.
+Application de gestion de cabinet médical développée avec Spring Boot.
+
+> **⚠️ Configuration requise**: L'application utilise **PostgreSQL** comme base de données. Assurez-vous que PostgreSQL est installé et configuré avant de démarrer l'application.
 
 ## 📝 Fonctionnalités
 
@@ -30,14 +32,12 @@ CABINET_MEDICAL/
 │   │   │   │       ├── mapper/
 │   │   │   │       └── exception/
 │   │   │   └── resources/
-│   │   │       ├── application.yml
+│   │   │       ├── application.properties
+│   │   │       ├── liquibase.properties
 │   │   │       └── db/changelog/
 │   │   └── test/
 │   ├── pom.xml
-│   ├── build.bat
-│   ├── run.bat
-│   └── README.md
-├── docker-compose.yml          # Configuration PostgreSQL
+│   └── target/
 └── README.md                   # Ce fichier
 ```
 
@@ -57,34 +57,78 @@ CABINET_MEDICAL/
 
 - Java 17 ou supérieur
 - Maven 3.8+
-- Docker et Docker Compose
+- PostgreSQL 16 (requis)
 
 ## 🚀 Démarrage Rapide
 
-### 1. Démarrer la base de données PostgreSQL
+### 1. Installer et Configurer PostgreSQL
 
-```bash
-docker-compose up -d
+#### Installation
+
+1. **Télécharger PostgreSQL 16**
+   - Site officiel: https://www.postgresql.org/download/windows/
+   - Ou directement: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+2. **Installer avec ces paramètres**:
+   - Port: `5432`
+   - Username: `postgres`
+   - Password: `0000` (ou votre choix - à retenir!)
+   - Locale: `French, France` ou `English, United States`
+
+3. **Vérifier l'installation**:
+   ```powershell
+   # Vérifier le service PostgreSQL
+   Get-Service | Where-Object { $_.DisplayName -like "*postgres*" }
+   
+   # Tester la connexion au port
+   Test-NetConnection -ComputerName localhost -Port 5432
+   ```
+
+#### Créer la base de données
+
+```powershell
+# Naviguer vers le répertoire bin de PostgreSQL
+cd "C:\Program Files\PostgreSQL\16\bin"
+
+# Se connecter à PostgreSQL (entrez le mot de passe quand demandé)
+.\psql.exe -U postgres
+
+# Dans l'invite psql, créer la base:
+CREATE DATABASE cabinet_medical;
+
+# Vérifier que la base existe:
+\l
+
+# Se connecter à la base:
+\c cabinet_medical
+
+# Quitter:
+\q
 ```
 
-Cela va démarrer :
-- PostgreSQL sur le port 5432 (pour le développement)
-- PostgreSQL sur le port 5433 (pour les tests)
+#### Configurer l'application
 
-### 2. Démarrer le Backend
+Si vous avez utilisé un mot de passe différent de `0000`, modifiez:
 
-```bash
+`backend/src/main/resources/application.properties`:
+```properties
+spring.datasource.password=VOTRE_MOT_DE_PASSE
+```
+
+### 2. Compiler et Démarrer le Backend
+
+```powershell
+# Compiler le projet
 cd backend
 mvn clean install
+
+# Lancer l'application
 mvn spring-boot:run
 ```
 
-Ou avec le script batch (Windows) :
+L'application démarrera sur: http://localhost:8080
 
-```bash
-cd backend
-run.bat
-```
+Au premier démarrage, Liquibase créera automatiquement toutes les tables et insérera les données de test.
 
 ## 🌐 Accès aux Services
 
@@ -92,14 +136,11 @@ Une fois l'application démarrée :
 
 | Service | URL |
 |---------|-----|
-| **API Backend** | http://localhost:8080/api |
-| **Swagger UI** | http://localhost:8080/api/swagger-ui.html |
-| **Health Check** | http://localhost:8080/api/health |
-| **OpenAPI Docs** | http://localhost:8080/api/api-docs |
+| **API Backend** | http://localhost:8080 |
+| **Swagger UI** | http://localhost:8080/swagger-ui.html |
+| **Health Check** | http://localhost:8080/actuator/health |
+| **OpenAPI Docs** | http://localhost:8080/api-docs |
 
-## 📚 Documentation
-
-- [Documentation Backend](backend/README.md) - Guide complet du backend Java/Spring Boot
 
 ## 🗄️ Base de Données
 
@@ -110,23 +151,27 @@ Host: localhost
 Port: 5432
 Database: cabinet_medical
 Username: postgres
-Password: postgres
+Password: 0000
 ```
 
-### Commandes Docker
+### Commandes utiles
 
 ```bash
-# Démarrer les conteneurs
-docker-compose up -d
+# Se connecter à la base (si psql dans PATH)
+psql -U postgres -d cabinet_medical
 
-# Arrêter les conteneurs
-docker-compose down
+# Ou avec le chemin complet
+cd "C:\Program Files\PostgreSQL\16\bin"
+.\psql.exe -U postgres -d cabinet_medical
 
-# Voir les logs
-docker-compose logs -f postgres
+# Lister les tables
+\dt
 
-# Se connecter à la base
-docker exec -it cabinet_medical_db psql -U postgres -d cabinet_medical
+# Décrire une table
+\d nom_table
+
+# Quitter psql
+\q
 ```
 
 ## 🔧 Configuration
@@ -199,31 +244,96 @@ Le JAR sera créé dans `backend/target/cabinet-medical-1.0.0-SNAPSHOT.jar`
 
 ## 🐛 Dépannage
 
+### Erreur: "authentification par mot de passe échouée pour l'utilisateur 'postgres'"
+
+C'est l'erreur la plus courante. Plusieurs solutions:
+
+#### Solution 1: Vérifier/Changer le mot de passe dans application.properties
+
+1. Ouvrez `backend/src/main/resources/application.properties`
+2. Trouvez la ligne `spring.datasource.password`
+3. Remplacez `0000` par votre mot de passe PostgreSQL réel
+
+```properties
+spring.datasource.password=VOTRE_MOT_DE_PASSE_ICI
+```
+
+#### Solution 2: Créer la base de données manuellement
+
+```powershell
+# Ouvrir psql en tant que postgres
+cd "C:\Program Files\PostgreSQL\16\bin"
+.\psql.exe -U postgres
+
+# Dans psql, créer la base:
+CREATE DATABASE cabinet_medical;
+
+# Vérifier que la base existe:
+\l
+
+# Quitter:
+\q
+```
+
+#### Solution 3: Réinitialiser le mot de passe PostgreSQL
+
+```powershell
+# Ouvrir psql
+cd "C:\Program Files\PostgreSQL\16\bin"
+.\psql.exe -U postgres
+
+# Changer le mot de passe (remplacez 0000 par le mot de passe souhaité):
+ALTER USER postgres PASSWORD '0000';
+
+# Quitter:
+\q
+```
+
+Puis relancez l'application.
+
 ### Port 8080 déjà utilisé
 
-Changez le port dans `backend/src/main/resources/application.yml` :
+Changez le port dans `backend/src/main/resources/application.properties` :
 
-```yaml
-server:
-  port: 8081
+```properties
+server.port=8081
 ```
 
 ### Base de données non accessible
 
-```bash
-# Vérifier que Docker tourne
-docker ps
+Vérifiez que PostgreSQL est démarré:
+1. Ouvrez les Services Windows (Win+R, puis `services.msc`)
+2. Cherchez le service `postgresql-x64-16` (ou version similaire)
+3. S'il n'est pas démarré, faites un clic droit > Démarrer
 
-# Redémarrer PostgreSQL
-docker-compose restart
+Ou redémarrez le service en PowerShell:
+```powershell
+# En tant qu'administrateur
+Restart-Service postgresql-x64-16
 ```
 
 ### Problème de compilation
 
 ```bash
 cd backend
-mvn clean
 mvn clean install
+```
+
+### Problème avec Liquibase
+
+Si Liquibase échoue, vous pouvez:
+
+1. **Désactiver Liquibase temporairement** dans `application.properties`:
+```properties
+spring.liquibase.enabled=false
+```
+
+2. **Créer les tables manuellement** via psql ou un outil comme pgAdmin
+
+3. **Supprimer les tables Liquibase** pour réinitialiser:
+```sql
+DROP TABLE IF EXISTS databasechangelog CASCADE;
+DROP TABLE IF EXISTS databasechangeloglock CASCADE;
 ```
 
 ## 📄 License
@@ -236,4 +346,4 @@ Ce projet est sous licence privée.
 
 ## 📞 Support
 
-Pour toute question, consultez la documentation dans le dossier `backend/`.
+Pour toute question, consultez la documentation dans le projet.
