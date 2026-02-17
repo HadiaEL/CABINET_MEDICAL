@@ -1,17 +1,30 @@
 # Cabinet Médical
 
-Application de gestion de cabinet médical développée avec Spring Boot.
+Application de gestion de cabinet médical développée avec Spring Boot et React.
 
 > **⚠️ Configuration requise**: L'application utilise **PostgreSQL** comme base de données. Assurez-vous que PostgreSQL est installé et configuré avant de démarrer l'application.
 
 ## 📝 Fonctionnalités
 
 En tant que patient:
+- Je peux m'authentifier avec mon email et mon téléphone
 - Je peux consulter la liste des médecins disponibles
 - Chaque médecin est associé à une spécialité
 - Je peux sélectionner un médecin ainsi que visualiser les créneaux de ses rendez-vous disponibles
 - Je peux réserver un créneau horaire disponible
 - Chaque créneau ne peut être réservé que par un seul patient
+
+## 🔐 Authentification
+
+L'authentification patient se fait via :
+- **Login** : Email du patient
+- **Mot de passe** : Numéro de téléphone du patient
+
+📖 **Voir le guide complet** : [AUTHENTICATION_GUIDE.md](AUTHENTICATION_GUIDE.md)
+
+### Exemple de compte de test
+- **Email** : `marie.durand@email.fr`
+- **Téléphone** : `0601020304`
 
 ## 📁 Structure du Projet
 
@@ -23,21 +36,36 @@ CABINET_MEDICAL/
 │   │   │   ├── java/
 │   │   │   │   └── com/cabinetmedical/
 │   │   │   │       ├── CabinetMedicalApplication.java
-│   │   │   │       ├── config/
-│   │   │   │       ├── controller/
-│   │   │   │       ├── entity/
-│   │   │   │       ├── repository/
-│   │   │   │       ├── service/
-│   │   │   │       ├── dto/
+│   │   │   │       ├── controller/      # AuthController, DoctorController
+│   │   │   │       ├── entity/          # Patient, Doctor, Speciality
+│   │   │   │       ├── repository/      # PatientRepository, DoctorRepository
+│   │   │   │       ├── service/         # AuthService, DoctorService
+│   │   │   │       ├── dto/             # LoginRequestDTO, LoginResponseDTO, DoctorDTO
 │   │   │   │       ├── mapper/
 │   │   │   │       └── exception/
 │   │   │   └── resources/
 │   │   │       ├── application.properties
 │   │   │       ├── liquibase.properties
 │   │   │       └── db/changelog/
+│   │   │           └── changes/
+│   │   │               ├── 001-initial-schema.xml
+│   │   │               ├── 002-seed-data.xml
+│   │   │               ├── 003-seed-medecins.xml
+│   │   │               └── 004-seed-patients.xml
 │   │   └── test/
-│   ├── pom.xml
-│   └── target/
+│   └── pom.xml
+├── frontend/                   # Application frontend React
+│   ├── src/
+│   │   ├── components/         # DoctorCard, PrivateRoute
+│   │   ├── context/           # AuthContext
+│   │   ├── pages/             # LoginPage, DoctorsPage
+│   │   ├── services/          # authService, doctorService
+│   │   ├── styles/            # CSS files
+│   │   └── main.jsx
+│   └── package.json
+├── AUTHENTICATION_GUIDE.md     # Guide d'authentification
+├── start-app.ps1              # Script de démarrage automatique
+├── test-auth.ps1              # Script de test de l'authentification
 └── README.md                   # Ce fichier
 ```
 
@@ -45,6 +73,20 @@ CABINET_MEDICAL/
 
 ### Backend
 - **Java 17** - Langage de programmation
+- **Spring Boot 3.2.2** - Framework web
+- **PostgreSQL 16** - Base de données
+- **Liquibase** - Gestion des migrations de base de données
+- **MapStruct 1.5.5** - Mapping entre entités et DTOs
+- **Swagger/OpenAPI 2.3.0** - Documentation de l'API REST
+- **Maven** - Gestion des dépendances
+- **Lombok 1.18.30** - Réduction du code boilerplate
+
+### Frontend
+- **React 16.14.0** - Bibliothèque UI
+- **React Router DOM 5.3.4** - Routing
+- **Axios 1.6.0** - Client HTTP
+- **Vite 5.0.0** - Build tool
+- **Vitest 1.0.0** - Framework de test
 - **Spring Boot 3.2.2** - Framework web
 - **PostgreSQL 16** - Base de données
 - **Liquibase** - Gestion des migrations de base de données
@@ -128,18 +170,72 @@ mvn spring-boot:run
 
 L'application démarrera sur: http://localhost:8080
 
-Au premier démarrage, Liquibase créera automatiquement toutes les tables et insérera les données de test.
+Au premier démarrage, Liquibase créera automatiquement toutes les tables et insérera les données de test (médecins et patients).
+
+### 3. Démarrer le Frontend
+
+Dans un nouveau terminal :
+
+```powershell
+# Installer les dépendances
+cd frontend
+npm install
+
+# Lancer le serveur de développement
+npm run dev
+```
+
+L'application frontend démarrera sur: http://localhost:5173
+
+Vous pouvez maintenant vous connecter avec un compte patient (voir [AUTHENTICATION_GUIDE.md](AUTHENTICATION_GUIDE.md)).
+
+## 🎯 Scripts PowerShell
+
+Pour faciliter le développement, des scripts PowerShell sont disponibles :
+
+### Démarrage automatique de l'application
+```powershell
+# Démarre le backend et le frontend automatiquement
+.\start-app.ps1
+```
+
+Ce script :
+- Compile le backend
+- Démarre le backend sur http://localhost:8080
+- Installe les dépendances du frontend
+- Démarre le frontend sur http://localhost:5173
+- Ouvre deux fenêtres PowerShell séparées
+
+### Test de l'API d'authentification
+```powershell
+# Teste l'endpoint de login avec un compte de test
+.\test-auth.ps1
+```
+
+Ce script :
+- Vérifie que le backend est accessible
+- Teste l'authentification avec un compte valide
+- Teste le rejet des identifiants invalides
+- Affiche les résultats des tests
 
 ## 🌐 Accès aux Services
 
 Une fois l'application démarrée :
 
-| Service | URL |
-|---------|-----|
-| **API Backend** | http://localhost:8080 |
-| **Swagger UI** | http://localhost:8080/swagger-ui.html |
-| **Health Check** | http://localhost:8080/actuator/health |
-| **OpenAPI Docs** | http://localhost:8080/api-docs |
+| Service | URL | Description |
+|---------|-----|-------------|
+| **Frontend** | http://localhost:5173 | Application React (page de login) |
+| **API Backend** | http://localhost:8080 | API REST Spring Boot |
+| **Swagger UI** | http://localhost:8080/swagger-ui.html | Documentation interactive de l'API |
+| **Health Check** | http://localhost:8080/actuator/health | Statut de l'application |
+| **OpenAPI Docs** | http://localhost:8080/api-docs | Spécification OpenAPI JSON |
+
+### Endpoints principaux
+
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/auth/login` | Authentification patient (email + téléphone) |
+| GET | `/doctor/allDoctors` | Liste paginée des médecins avec leurs spécialités |
 
 
 ## 🗄️ Base de Données

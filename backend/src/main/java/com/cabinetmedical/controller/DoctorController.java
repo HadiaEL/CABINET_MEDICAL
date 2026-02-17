@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/doctor")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"}, allowCredentials = "true")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Médecins API", description = "API REST pour la gestion des médecins du cabinet médical - Microservice")

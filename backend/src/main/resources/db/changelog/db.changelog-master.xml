@@ -14,5 +14,8 @@
     <!-- Données de test : médecins -->
     <include file="db/changelog/changes/003-seed-medecins.xml"/>
 
+    <!-- Données de test : patients -->
+    <include file="db/changelog/changes/004-seed-patients.xml"/>
+
 </databaseChangeLog>
 

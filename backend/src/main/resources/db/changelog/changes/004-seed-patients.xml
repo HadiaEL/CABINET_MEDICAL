@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="004-seed-patients" author="cabinet-medical">
+        <comment>Alimentation de la table patients avec des données de test</comment>
+
+        <!-- Patients avec emails et téléphones uniques -->
+        <insert tableName="patients">
+            <column name="nom" value="admin"/>
+            <column name="prenom" value="admin"/>
+            <column name="email" value="admin@admin.fr"/>
+            <column name="telephone" value="0123456789"/>
+            <column name="date_naissance" value="1991-03-15 00:00:00"/>
+            <column name="adresse" value="18 Rue de la Paix, 75004 Paris"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Durand"/>
+            <column name="prenom" value="Marie"/>
+            <column name="email" value="marie.durand@email.fr"/>
+            <column name="telephone" value="0601020304"/>
+            <column name="date_naissance" value="1985-03-15 00:00:00"/>
+            <column name="adresse" value="12 Rue de la Paix, 75002 Paris"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Leroy"/>
+            <column name="prenom" value="Pierre"/>
+            <column name="email" value="pierre.leroy@email.fr"/>
+            <column name="telephone" value="0602030405"/>
+            <column name="date_naissance" value="1978-07-22 00:00:00"/>
+            <column name="adresse" value="45 Avenue des Champs, 69001 Lyon"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Moreau"/>
+            <column name="prenom" value="Sophie"/>
+            <column name="email" value="sophie.moreau@email.fr"/>
+            <column name="telephone" value="0603040506"/>
+            <column name="date_naissance" value="1992-11-08 00:00:00"/>
+            <column name="adresse" value="8 Boulevard Victor Hugo, 31000 Toulouse"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Bernard"/>
+            <column name="prenom" value="Luc"/>
+            <column name="email" value="luc.bernard@email.fr"/>
+            <column name="telephone" value="0604050607"/>
+            <column name="date_naissance" value="1980-05-30 00:00:00"/>
+            <column name="adresse" value="23 Rue du Commerce, 44000 Nantes"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Petit"/>
+            <column name="prenom" value="Julie"/>
+            <column name="email" value="julie.petit@email.fr"/>
+            <column name="telephone" value="0605060708"/>
+            <column name="date_naissance" value="1995-09-12 00:00:00"/>
+            <column name="adresse" value="67 Rue Gambetta, 33000 Bordeaux"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Robert"/>
+            <column name="prenom" value="Thomas"/>
+            <column name="email" value="thomas.robert@email.fr"/>
+            <column name="telephone" value="0606070809"/>
+            <column name="date_naissance" value="1988-02-20 00:00:00"/>
+            <column name="adresse" value="15 Place de la République, 59000 Lille"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Richard"/>
+            <column name="prenom" value="Isabelle"/>
+            <column name="email" value="isabelle.richard@email.fr"/>
+            <column name="telephone" value="0607080910"/>
+            <column name="date_naissance" value="1973-12-05 00:00:00"/>
+            <column name="adresse" value="89 Avenue Jean Jaurès, 13001 Marseille"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Simon"/>
+            <column name="prenom" value="Nicolas"/>
+            <column name="email" value="nicolas.simon@email.fr"/>
+            <column name="telephone" value="0608091011"/>
+            <column name="date_naissance" value="1990-06-18 00:00:00"/>
+            <column name="adresse" value="34 Rue de la Liberté, 67000 Strasbourg"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Laurent"/>
+            <column name="prenom" value="Céline"/>
+            <column name="email" value="celine.laurent@email.fr"/>
+            <column name="telephone" value="0609101112"/>
+            <column name="date_naissance" value="1987-04-25 00:00:00"/>
+            <column name="adresse" value="56 Boulevard Pasteur, 35000 Rennes"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Michel"/>
+            <column name="prenom" value="Antoine"/>
+            <column name="email" value="antoine.michel@email.fr"/>
+            <column name="telephone" value="0610111213"/>
+            <column name="date_naissance" value="1982-08-14 00:00:00"/>
+            <column name="adresse" value="78 Rue Lafayette, 76000 Rouen"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Garcia"/>
+            <column name="prenom" value="Émilie"/>
+            <column name="email" value="emilie.garcia@email.fr"/>
+            <column name="telephone" value="0611121314"/>
+            <column name="date_naissance" value="1994-01-09 00:00:00"/>
+            <column name="adresse" value="90 Avenue de la Gare, 06000 Nice"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Martinez"/>
+            <column name="prenom" value="David"/>
+            <column name="email" value="david.martinez@email.fr"/>
+            <column name="telephone" value="0612131415"/>
+            <column name="date_naissance" value="1976-10-27 00:00:00"/>
+            <column name="adresse" value="42 Rue du Marché, 21000 Dijon"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Lopez"/>
+            <column name="prenom" value="Valérie"/>
+            <column name="email" value="valerie.lopez@email.fr"/>
+            <column name="telephone" value="0613141516"/>
+            <column name="date_naissance" value="1989-07-03 00:00:00"/>
+            <column name="adresse" value="101 Rue Nationale, 37000 Tours"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Gonzalez"/>
+            <column name="prenom" value="François"/>
+            <column name="email" value="francois.gonzalez@email.fr"/>
+            <column name="telephone" value="0614151617"/>
+            <column name="date_naissance" value="1983-03-16 00:00:00"/>
+            <column name="adresse" value="25 Place du Capitole, 31000 Toulouse"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="patients">
+            <column name="nom" value="Rodriguez"/>
+            <column name="prenom" value="Sandrine"/>
+            <column name="email" value="sandrine.rodriguez@email.fr"/>
+            <column name="telephone" value="0615161718"/>
+            <column name="date_naissance" value="1991-12-22 00:00:00"/>
+            <column name="adresse" value="63 Boulevard de la Mer, 29200 Brest"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
+
