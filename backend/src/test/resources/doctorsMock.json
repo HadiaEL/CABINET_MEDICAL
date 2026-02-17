@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "email": "jean.dupont@cabinet.fr",
+    "telephone": "0123456789",
+    "numeroOrdre": "ORD-12345",
+    "specialite": {
+      "id": 1,
+      "nom": "Cardiologie",
+      "description": "Spécialiste du cœur"
+    }
+  },
+  {
+    "id": 2,
+    "nom": "Martin",
+    "prenom": "Marie",
+    "email": "marie.martin@cabinet.fr",
+    "telephone": "0987654321",
+    "numeroOrdre": "ORD-67890",
+    "specialite": {
+      "id": 2,
+      "nom": "Dermatologie",
+      "description": "Spécialiste de la peau"
+    }
+  },
+  {
+    "id": 3,
+    "nom": "Bernard",
+    "prenom": "Paul",
+    "email": "paul.bernard@cabinet.fr",
+    "telephone": "0147258369",
+    "numeroOrdre": "ORD-11111",
+    "specialite": {
+      "id": 1,
+      "nom": "Cardiologie",
+      "description": "Spécialiste du cœur"
+    }
+  }
+]
+

@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "nom": "Cardiologie",
+    "description": "Spécialiste du cœur"
+  },
+  {
+    "id": 2,
+    "nom": "Dermatologie",
+    "description": "Spécialiste de la peau"
+  }
+]
+
