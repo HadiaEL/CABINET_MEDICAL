@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="002-seed-specialites" author="cabinet-medical">
+        <comment>Insertion des spécialités médicales de base</comment>
+
+        <insert tableName="specialites">
+            <column name="nom" value="Médecine Générale"/>
+            <column name="description" value="Médecin généraliste pour consultations générales"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="specialites">
+            <column name="nom" value="Cardiologie"/>
+            <column name="description" value="Spécialiste des maladies cardiovasculaires"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="specialites">
+            <column name="nom" value="Dermatologie"/>
+            <column name="description" value="Spécialiste des maladies de la peau"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="specialites">
+            <column name="nom" value="Pédiatrie"/>
+            <column name="description" value="Médecin spécialiste des enfants"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="specialites">
+            <column name="nom" value="Ophtalmologie"/>
+            <column name="description" value="Spécialiste des yeux et de la vision"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="specialites">
+            <column name="nom" value="ORL"/>
+            <column name="description" value="Oto-rhino-laryngologie - Spécialiste des oreilles, nez et gorge"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="003-seed-jours-semaine" author="cabinet-medical">
+        <comment>Insertion des jours de la semaine</comment>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Lundi"/>
+            <column name="numero_jour" valueNumeric="1"/>
+            <column name="ouvrable" valueBoolean="true"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Mardi"/>
+            <column name="numero_jour" valueNumeric="2"/>
+            <column name="ouvrable" valueBoolean="true"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Mercredi"/>
+            <column name="numero_jour" valueNumeric="3"/>
+            <column name="ouvrable" valueBoolean="true"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Jeudi"/>
+            <column name="numero_jour" valueNumeric="4"/>
+            <column name="ouvrable" valueBoolean="true"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Vendredi"/>
+            <column name="numero_jour" valueNumeric="5"/>
+            <column name="ouvrable" valueBoolean="true"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Samedi"/>
+            <column name="numero_jour" valueNumeric="6"/>
+            <column name="ouvrable" valueBoolean="false"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="jours_semaine">
+            <column name="nom" value="Dimanche"/>
+            <column name="numero_jour" valueNumeric="7"/>
+            <column name="ouvrable" valueBoolean="false"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="004-seed-heures-jour" author="cabinet-medical">
+        <comment>Insertion des heures de la journée (08:00 à 19:00 par heure)</comment>
+
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="08:00:00"/>
+            <column name="libelle" value="08:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="09:00:00"/>
+            <column name="libelle" value="09:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="10:00:00"/>
+            <column name="libelle" value="10:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="11:00:00"/>
+            <column name="libelle" value="11:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="12:00:00"/>
+            <column name="libelle" value="12:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="13:00:00"/>
+            <column name="libelle" value="13:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="14:00:00"/>
+            <column name="libelle" value="14:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="15:00:00"/>
+            <column name="libelle" value="15:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="16:00:00"/>
+            <column name="libelle" value="16:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="17:00:00"/>
+            <column name="libelle" value="17:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="18:00:00"/>
+            <column name="libelle" value="18:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="heures_jour">
+            <column name="heure" valueDate="19:00:00"/>
+            <column name="libelle" value="19:00"/>
+            <column name="created_at" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
+

@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cabinet_medical_test
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    drop-first: true
+
+logging:
+  level:
+    com.cabinetmedical: DEBUG
+
