@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RendezVous {
+public class Appointement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +45,7 @@ public class RendezVous {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medecin_id", nullable = false)
-    private Medecin medecin;
+    private Doctor doctor;
 
     @Column(name = "date_heure_debut", nullable = false)
     private LocalDateTime dateHeureDebut;
@@ -88,8 +88,8 @@ public class RendezVous {
     /**
      * Vérifie si ce rendez-vous chevauche un autre rendez-vous
      */
-    public boolean chevauche(RendezVous autre) {
-        if (autre == null || !this.medecin.getId().equals(autre.getMedecin().getId())) {
+    public boolean chevauche(Appointement autre) {
+        if (autre == null || !this.doctor.getId().equals(autre.getDoctor().getId())) {
             return false;
         }
 

@@ -31,14 +31,14 @@
     }
   ],
   "paths": {
-    "/medecin/allMedecins": {
+    "/doctor/allDoctors": {
       "get": {
         "tags": [
           "Médecins API"
         ],
         "summary": "Récupérer tous les médecins avec pagination et tri",
         "description": "Endpoint REST API pour récupérer la liste paginée de tous les médecins avec leurs spécialités. Retourne un objet paginé avec la liste des médecins, le nombre de pages, le nombre total d'éléments et les informations de navigation. Supporte le tri par les champs de la table médecin.",
-        "operationId": "getAllMedecins",
+        "operationId": "getAllDoctors",
         "parameters": [
           {
             "name": "page",
@@ -108,7 +108,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageResponseMedecinDTO"
+                  "$ref": "#/components/schemas/PageResponseDoctorDTO"
                 },
                 "example": {
                   "content": [
@@ -162,7 +162,7 @@
                   "status": 400,
                   "error": "Bad Request",
                   "message": "Le numéro de page ne peut pas être négatif",
-                  "path": "/medecin/allMedecins"
+                  "path": "/doctor/allDoctors"
                 }
               }
             }
@@ -183,7 +183,7 @@
   },
   "components": {
     "schemas": {
-      "PageResponseMedecinDTO": {
+      "PageResponseDoctorDTO": {
         "type": "object",
         "description": "Réponse paginée contenant la liste des médecins",
         "required": [
@@ -198,7 +198,7 @@
             "type": "array",
             "description": "Liste des médecins de la page courante",
             "items": {
-              "$ref": "#/components/schemas/MedecinDTO"
+              "$ref": "#/components/schemas/DoctorDTO"
             }
           },
           "pageNumber": {
@@ -242,7 +242,7 @@
           }
         }
       },
-      "MedecinDTO": {
+      "DoctorDTO": {
         "type": "object",
         "description": "Objet Médecin retourné par l'API",
         "required": [
@@ -355,7 +355,7 @@
           "path": {
             "type": "string",
             "description": "Chemin de la requête",
-            "example": "/medecin/allMedecins/999"
+            "example": "/doctor/allDoctors/999"
           }
         }
       }

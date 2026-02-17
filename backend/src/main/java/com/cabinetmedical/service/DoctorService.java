@@ -1,6 +1,6 @@
 package com.cabinetmedical.service;
 
-import com.cabinetmedical.dto.MedecinDTO;
+import com.cabinetmedical.dto.DoctorDTO;
 import com.cabinetmedical.dto.PageResponse;
 import org.springframework.data.domain.Pageable;
 
@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
  * Interface du service de gestion des médecins
  * Version simplifiée: récupération paginée uniquement
  */
-public interface MedecinService {
+public interface DoctorService {
 
     /**
      * Récupère tous les médecins avec pagination et tri
@@ -16,6 +16,6 @@ public interface MedecinService {
      * @param pageable Configuration de pagination et tri
      * @return Page de médecins avec leurs spécialités
      */
-    PageResponse<MedecinDTO> getAllMedecins(Pageable pageable);
+    PageResponse<DoctorDTO> getAllDoctors(Pageable pageable);
 }
 

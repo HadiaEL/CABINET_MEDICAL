@@ -8,37 +8,27 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * Entité représentant un médecin du cabinet
+ * Entité représentant un jour de la semaine
  */
 @Entity
-@Table(name = "medecins")
+@Table(name = "jours_semaine")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medecin {
+public class DaysOfTheWeek {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, unique = true, length = 20)
     private String nom;
 
-    @Column(nullable = false, length = 100)
-    private String prenom;
+    @Column(name = "numero_jour", nullable = false, unique = true)
+    private Integer numeroJour; // 1=Lundi, 2=Mardi, ..., 7=Dimanche
 
-    @Column(unique = true, length = 255)
-    private String email;
-
-    @Column(length = 20)
-    private String telephone;
-
-    @Column(name = "numero_ordre", unique = true, length = 50)
-    private String numeroOrdre;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialite_id", nullable = false)
-    private Specialite specialite;
+    @Column(nullable = false)
+    private Boolean ouvrable = true;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

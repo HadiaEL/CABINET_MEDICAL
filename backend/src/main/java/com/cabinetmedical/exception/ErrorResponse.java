@@ -22,7 +22,7 @@ public record ErrorResponse(
         @Schema(description = "Message détaillé", example = "Médecin non trouvé avec id: '1'")
         String message,
 
-        @Schema(description = "Chemin de la requête", example = "/medecin/allMedecins/1")
+        @Schema(description = "Chemin de la requête", example = "/doctor/allDoctors/1")
         String path
 ) {
     /**

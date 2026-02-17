@@ -8,24 +8,37 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * Entité représentant une spécialité médicale
+ * Entité représentant un médecin du cabinet
  */
 @Entity
-@Table(name = "specialites")
+@Table(name = "medecins")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Specialite {
+public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String nom;
 
-    @Column(length = 500)
-    private String description;
+    @Column(nullable = false, length = 100)
+    private String prenom;
+
+    @Column(unique = true, length = 255)
+    private String email;
+
+    @Column(length = 20)
+    private String telephone;
+
+    @Column(name = "numero_ordre", unique = true, length = 50)
+    private String numeroOrdre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialite_id", nullable = false)
+    private Speciality speciality;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

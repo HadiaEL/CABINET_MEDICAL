@@ -1,9 +1,9 @@
 package com.cabinetmedical.controller;
 
-import com.cabinetmedical.dto.MedecinDTO;
+import com.cabinetmedical.dto.DoctorDTO;
 import com.cabinetmedical.dto.PageResponse;
 import com.cabinetmedical.exception.ErrorResponse;
-import com.cabinetmedical.service.MedecinService;
+import com.cabinetmedical.service.DoctorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.*;
  * Endpoint simplifié: pagination et tri uniquement
  */
 @RestController
-@RequestMapping("/medecin")
+@RequestMapping("/doctor")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Médecins API", description = "API REST pour la gestion des médecins du cabinet médical - Microservice")
-public class MedecinController {
+public class DoctorController {
 
-    private final MedecinService medecinService;
+    private final DoctorService doctorService;
 
     /**
      * Récupère la liste paginée de tous les médecins avec tri
@@ -67,8 +67,8 @@ public class MedecinController {
                     )
             )
     })
-    @GetMapping("/allMedecins")
-    public ResponseEntity<PageResponse<MedecinDTO>> getAllMedecins(
+    @GetMapping("/allDoctors")
+    public ResponseEntity<PageResponse<DoctorDTO>> getAllDoctors(
             @Parameter(description = "Numéro de la page (commence à 0)", example = "0")
             @RequestParam(defaultValue = "0") int page,
 
@@ -87,7 +87,7 @@ public class MedecinController {
             )
             @RequestParam(defaultValue = "asc") String sortDirection
     ) {
-        log.info("GET /medecin/allMedecins - page: {}, size: {}, sortBy: {}, sortDirection: {}",
+        log.info("GET /doctor/allDoctors - page: {}, size: {}, sortBy: {}, sortDirection: {}",
                  page, size, sortBy, sortDirection);
 
         // Validation des paramètres
@@ -98,7 +98,7 @@ public class MedecinController {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         // Récupération des données
-        PageResponse<MedecinDTO> response = medecinService.getAllMedecins(pageable);
+        PageResponse<DoctorDTO> response = doctorService.getAllDoctors(pageable);
 
         return ResponseEntity.ok(response);
     }

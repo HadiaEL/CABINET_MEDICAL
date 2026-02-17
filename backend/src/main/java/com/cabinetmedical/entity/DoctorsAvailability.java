@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DisponibiliteMedecin {
+public class DoctorsAvailability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,19 +37,19 @@ public class DisponibiliteMedecin {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medecin_id", nullable = false)
-    private Medecin medecin;
+    private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jour_semaine_id", nullable = false)
-    private JourSemaine jourSemaine;
+    private DaysOfTheWeek jourSemaine;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "heure_debut_id", nullable = false)
-    private HeureJour heureDebut;
+    private HoursOfTheDay heureDebut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "heure_fin_id", nullable = false)
-    private HeureJour heureFin;
+    private HoursOfTheDay heureFin;
 
     @Column(nullable = false)
     private Boolean actif = true;

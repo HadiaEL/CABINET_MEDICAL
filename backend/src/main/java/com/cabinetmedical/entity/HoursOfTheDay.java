@@ -16,7 +16,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HeureJour {
+public class HoursOfTheDay {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

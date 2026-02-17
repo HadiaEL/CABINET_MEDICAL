@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * DTO représentant un médecin dans les réponses API
  */
 @Schema(description = "Informations complètes d'un médecin")
-public record MedecinDTO(
+public record DoctorDTO(
         @Schema(description = "Identifiant unique du médecin", example = "1")
         Long id,
 
@@ -26,7 +26,7 @@ public record MedecinDTO(
         String numeroOrdre,
 
         @Schema(description = "Spécialité du médecin")
-        SpecialiteDTO specialite
+        SpecialityDTO specialite
 ) {
 }
 
