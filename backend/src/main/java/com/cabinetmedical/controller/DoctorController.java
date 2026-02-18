@@ -40,7 +40,8 @@ public class DoctorController {
             summary = "Récupérer tous les médecins avec pagination et tri",
             description = "Endpoint REST API pour récupérer la liste paginée de tous les médecins avec leurs spécialités. " +
                          "Retourne un objet paginé avec la liste des médecins, le nombre de pages, le nombre total d'éléments et les informations de navigation. " +
-                         "Supporte le tri par différents champs de la table médecin."
+                         "Supporte le tri par différents champs de la table médecin. " +
+                         "Peut être filtré par ID de spécialité en utilisant le paramètre 'specialityId'."
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -86,10 +87,16 @@ public class DoctorController {
                     description = "Direction du tri (asc ou desc)",
                     example = "asc"
             )
-            @RequestParam(defaultValue = "asc") String sortDirection
+            @RequestParam(defaultValue = "asc") String sortDirection,
+
+            @Parameter(
+                    description = "ID de la spécialité pour filtrer (optionnel)",
+                    example = "6"
+            )
+            @RequestParam(required = false) Long specialityId
     ) {
-        log.info("GET /doctor/allDoctors - page: {}, size: {}, sortBy: {}, sortDirection: {}",
-                 page, size, sortBy, sortDirection);
+        log.info("GET /doctor/allDoctors - page: {}, size: {}, sortBy: {}, sortDirection: {}, specialityId: {}",
+                 page, size, sortBy, sortDirection, specialityId);
 
         // Validation des paramètres
         validatePaginationParams(page, size);
@@ -98,8 +105,13 @@ public class DoctorController {
         Sort sort = createSort(sortBy, sortDirection);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        // Récupération des données
-        PageResponse<DoctorDTO> response = doctorService.getAllDoctors(pageable);
+        // Récupération des données avec ou sans filtre de spécialité
+        PageResponse<DoctorDTO> response;
+        if (specialityId != null) {
+            response = doctorService.getDoctorsBySpeciality(specialityId, pageable);
+        } else {
+            response = doctorService.getAllDoctors(pageable);
+        }
 
         return ResponseEntity.ok(response);
     }

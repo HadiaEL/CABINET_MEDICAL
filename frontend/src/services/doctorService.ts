@@ -7,7 +7,7 @@ interface GetDoctorsParams {
   sortBy?: string;
   sortDirection?: string;
   search?: string;
-  speciality?: string;
+  specialityId?: number;
 }
 
 /**
@@ -26,6 +26,11 @@ export const getDoctors = async (params: GetDoctorsParams = {}): Promise<PageRes
     // Only include size if explicitly provided
     if (params.size !== undefined) {
       queryParams.size = params.size;
+    }
+
+    // Only include specialityId if explicitly provided
+    if (params.specialityId !== undefined) {
+      queryParams.specialityId = params.specialityId;
     }
 
     const response = await apiClient.get<PageResponse<Doctor>>('/doctor/allDoctors', {

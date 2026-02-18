@@ -17,5 +17,15 @@ public interface DoctorService {
      * @return Page de médecins avec leurs spécialités
      */
     PageResponse<DoctorDTO> getAllDoctors(Pageable pageable);
+
+    /**
+     * Récupère les médecins filtrés par spécialité avec pagination et tri
+     *
+     * @param specialityId ID de la spécialité à filtrer
+     * @param pageable Configuration de pagination et tri
+     * @return Page de médecins correspondant à la spécialité
+     */
+    PageResponse<DoctorDTO> getDoctorsBySpeciality(Long specialityId, Pageable pageable);
+
 }
 

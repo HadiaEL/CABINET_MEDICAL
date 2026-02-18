@@ -22,5 +22,18 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
             LEFT JOIN FETCH d.speciality
             """)
     Page<Doctor> findAllWithSpecialite(Pageable pageable);
+
+    /**
+     * Récupère les médecins filtrés par ID de spécialité
+     * @param specialityId ID de la spécialité à filtrer
+     * @param pageable Configuration de pagination et tri
+     * @return Page de médecins correspondant à la spécialité
+     */
+    @Query("""
+            SELECT DISTINCT d FROM Doctor d
+            LEFT JOIN FETCH d.speciality s
+            WHERE s.id = :specialityId
+            """)
+    Page<Doctor> findBySpecialityId(Long specialityId, Pageable pageable);
 }
 

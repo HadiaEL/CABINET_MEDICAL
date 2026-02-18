@@ -45,5 +45,27 @@ public class DoctorServiceImpl implements DoctorService {
 
         return PageResponse.of(dtoPage);
     }
+
+    /**
+     * Récupère les médecins filtrés par spécialité avec pagination et tri
+     */
+    @Override
+    public PageResponse<DoctorDTO> getDoctorsBySpeciality(Long specialityId, Pageable pageable) {
+        log.debug("Récupération des médecins par spécialité ID: {} - page: {}", specialityId, pageable.getPageNumber());
+
+        // Récupération avec FETCH JOIN et filtre sur l'ID de la spécialité
+        Page<Doctor> doctorPage = doctorRepository.findBySpecialityId(specialityId, pageable);
+
+        // Conversion avec MapStruct
+        Page<DoctorDTO> dtoPage = doctorPage.map(doctorMapper::toDTO);
+
+        log.info("Trouvé {} médecins avec la spécialité ID '{}' (page {}/{})",
+                 dtoPage.getTotalElements(),
+                 specialityId,
+                 dtoPage.getNumber() + 1,
+                 dtoPage.getTotalPages());
+
+        return PageResponse.of(dtoPage);
+    }
 }
 

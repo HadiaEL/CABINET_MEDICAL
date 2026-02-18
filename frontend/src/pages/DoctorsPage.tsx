@@ -24,7 +24,7 @@ interface Doctor {
 interface FetchParams {
   page: number;
   search?: string;
-  speciality?: string;
+  specialityId?: number;
 }
 
 const DoctorsPage: React.FC = () => {
@@ -34,7 +34,7 @@ const DoctorsPage: React.FC = () => {
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [selectedSpeciality, setSelectedSpeciality] = useState<string>('');
+  const [selectedSpecialityId, setSelectedSpecialityId] = useState<number | null>(null);
   const [specialities, setSpecialities] = useState<Specialite[]>([]);
 
   const { user, logout } = useAuth();
@@ -54,8 +54,9 @@ const DoctorsPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log('🔄 useEffect triggered - page:', page, 'searchTerm:', searchTerm, 'selectedSpecialityId:', selectedSpecialityId);
     fetchDoctors();
-  }, [page, searchTerm, selectedSpeciality]);
+  }, [page, searchTerm, selectedSpecialityId]);
 
   const fetchDoctors = async (): Promise<void> => {
     setLoading(true);
@@ -69,16 +70,18 @@ const DoctorsPage: React.FC = () => {
         params.search = searchTerm;
       }
 
-      if (selectedSpeciality) {
-        params.speciality = selectedSpeciality;
+      if (selectedSpecialityId) {
+        params.specialityId = selectedSpecialityId;
       }
 
+      console.log('📡 Appel API avec params:', params);
       const response = await getDoctors(params);
+      console.log('✅ Réponse API:', response);
       setDoctors(response.content || []);
       setTotalPages(response.totalPages || 0);
     } catch (err) {
       setError('Erreur lors du chargement des médecins');
-      console.error(err);
+      console.error('❌ Erreur API:', err);
     } finally {
       setLoading(false);
     }
@@ -92,7 +95,16 @@ const DoctorsPage: React.FC = () => {
   const handleSearch = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setPage(0);
-    fetchDoctors();
+    // fetchDoctors() will be triggered automatically by useEffect
+  };
+
+  const handleSpecialityChange = (e: ChangeEvent<HTMLSelectElement>): void => {
+    const value = e.target.value;
+    const specialityId = value ? parseInt(value, 10) : null;
+    console.log('🔍 Spécialité sélectionnée - ID:', specialityId);
+    setSelectedSpecialityId(specialityId);
+    setPage(0); // Reset to first page when filter changes
+    // API call will be triggered automatically by useEffect when selectedSpecialityId changes
   };
 
   const handlePageChange = (newPage: number): void => {
@@ -126,13 +138,13 @@ const DoctorsPage: React.FC = () => {
               className="search-input"
             />
             <select
-              value={selectedSpeciality}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => setSelectedSpeciality(e.target.value)}
+              value={selectedSpecialityId?.toString() || ''}
+              onChange={handleSpecialityChange}
               className="speciality-select"
             >
               <option value="">Toutes les spécialités</option>
               {specialities.map((specialite) => (
-                <option key={specialite.id} value={specialite.nom}>
+                <option key={specialite.id} value={specialite.id}>
                   {specialite.nom}
                 </option>
               ))}
