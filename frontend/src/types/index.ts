@@ -1,30 +1,9 @@
-/ Types pour l'application Cabinet Médical
+// Re-export all types from separate files
+export * from './userType';
+export * from './doctorType';
+export * from './specialityType';
 
-export interface User {
-  id: number;
-  nom: string;
-  prenom: string;
-  email: string;
-  role: string;
-}
-
-export interface Specialite {
-  id: number;
-  nom: string;
-  description: string;
-}
-
-export interface Doctor {
-  id: number;
-  nom: string;
-  prenom: string;
-  email: string;
-  telephone: string;
-  numeroOrdre: string;
-  specialite: Specialite;
-}
-
-export interface PageResponse<T> {
+export type PageResponse<T> = {
   content: T[];
   totalElements: number;
   totalPages: number;
@@ -34,11 +13,3 @@ export interface PageResponse<T> {
   last: boolean;
   empty: boolean;
 }
-
-export interface LoginRequest {
-  email: string;
-  telephone: string;
-}
-
-export interface LoginResponse extends User {}
-
