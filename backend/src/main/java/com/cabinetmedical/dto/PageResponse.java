@@ -17,7 +17,7 @@ public record PageResponse<T>(
         @Schema(description = "Numéro de la page actuelle (commence à 0)", example = "0")
         int pageNumber,
 
-        @Schema(description = "Taille de la page", example = "10")
+        @Schema(description = "Taille de la page", example = "9")
         int pageSize,
 
         @Schema(description = "Nombre total d'éléments", example = "50")

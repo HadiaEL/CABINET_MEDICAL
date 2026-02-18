@@ -21,7 +21,6 @@ interface Doctor {
 
 interface FetchParams {
   page: number;
-  size: number;
   search?: string;
   speciality?: string;
 }
@@ -48,7 +47,6 @@ const DoctorsPage: React.FC = () => {
     try {
       const params: FetchParams = {
         page,
-        size: 10,
       };
 
       if (searchTerm) {

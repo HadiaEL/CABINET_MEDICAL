@@ -107,7 +107,7 @@ class DoctorServiceImplTest {
             mockDoctorDTOs.add(doctorDTO);
         }
 
-        pageable = PageRequest.of(0, 10, Sort.by("nom").ascending());
+        pageable = PageRequest.of(0, 9, Sort.by("nom").ascending());
     }
 
     /**
@@ -142,7 +142,7 @@ class DoctorServiceImplTest {
         assertThat(result.content()).hasSize(3);
         assertThat(result.totalElements()).isEqualTo(3);
         assertThat(result.pageNumber()).isEqualTo(0);
-        assertThat(result.pageSize()).isEqualTo(10);
+        assertThat(result.pageSize()).isEqualTo(9);
         assertThat(result.totalPages()).isEqualTo(1);
         assertThat(result.first()).isTrue();
         assertThat(result.last()).isTrue();
@@ -185,7 +185,7 @@ class DoctorServiceImplTest {
     @DisplayName("getAllDoctors - Devrait gérer la pagination correctement")
     void getAllDoctors_ShouldHandlePaginationCorrectly() {
         // Given - Simuler la deuxième page avec seulement 2 médecins
-        Pageable secondPageable = PageRequest.of(1, 10, Sort.by("nom").ascending());
+        Pageable secondPageable = PageRequest.of(1, 9, Sort.by("nom").ascending());
         List<Doctor> secondPageDoctors = mockDoctorEntities.subList(0, 2);
         Page<Doctor> doctorPage = new PageImpl<>(secondPageDoctors, secondPageable, 25); // 25 éléments au total
 
@@ -212,7 +212,7 @@ class DoctorServiceImplTest {
     @DisplayName("getAllDoctors - Devrait appliquer le tri correctement")
     void getAllDoctors_ShouldApplySortingCorrectly() {
         // Given - Tri par prénom en ordre décroissant
-        Pageable sortedPageable = PageRequest.of(0, 10, Sort.by("prenom").descending());
+        Pageable sortedPageable = PageRequest.of(0, 9, Sort.by("prenom").descending());
         Page<Doctor> doctorPage = new PageImpl<>(mockDoctorEntities, sortedPageable, mockDoctorEntities.size());
 
         when(doctorRepository.findAllWithSpecialite(sortedPageable)).thenReturn(doctorPage);
@@ -328,7 +328,7 @@ class DoctorServiceImplTest {
     @DisplayName("getAllDoctors - Devrait retourner la dernière page correctement")
     void getAllDoctors_ShouldReturnLastPageCorrectly() {
         // Given - Dernière page avec un seul élément
-        Pageable lastPageable = PageRequest.of(2, 10);
+        Pageable lastPageable = PageRequest.of(2, 9);
         List<Doctor> lastPageDoctors = mockDoctorEntities.subList(0, 1);
         Page<Doctor> doctorPage = new PageImpl<>(lastPageDoctors, lastPageable, 21); // 21 éléments au total
 

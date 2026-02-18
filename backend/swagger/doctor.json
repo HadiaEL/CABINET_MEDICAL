@@ -61,11 +61,11 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 10,
+              "default": 9,
               "minimum": 1,
               "maximum": 100
             },
-            "example": 10
+            "example": 9
           },
           {
             "name": "sortBy",
@@ -140,7 +140,7 @@
                     }
                   ],
                   "pageNumber": 0,
-                  "pageSize": 10,
+                  "pageSize": 9,
                   "totalElements": 50,
                   "totalPages": 5,
                   "first": true,
@@ -211,7 +211,7 @@
             "type": "integer",
             "format": "int32",
             "description": "Nombre d'éléments par page",
-            "example": 10
+            "example": 9
           },
           "totalElements": {
             "type": "integer",

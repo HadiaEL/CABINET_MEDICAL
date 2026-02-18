@@ -73,8 +73,8 @@ public class DoctorController {
             @Parameter(description = "Numéro de la page (commence à 0)", example = "0")
             @RequestParam(defaultValue = "0") int page,
 
-            @Parameter(description = "Nombre d'éléments par page (taille)", example = "10")
-            @RequestParam(defaultValue = "10") int size,
+            @Parameter(description = "Nombre d'éléments par page (taille)", example = "9")
+            @RequestParam(defaultValue = "9") int size,
 
             @Parameter(
                     description = "Champ pour le tri (nom, prenom, numeroOrdre, email, telephone, specialite)",

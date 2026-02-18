@@ -62,7 +62,7 @@ class DoctorControllerTest {
         mockPageResponse = new PageResponse<>(
                 mockDoctors,
                 0,      // pageNumber
-                10,     // pageSize
+                9,     // pageSize
                 3L,     // totalElements
                 1,      // totalPages
                 true,   // first
@@ -92,7 +92,7 @@ class DoctorControllerTest {
                 .andExpect(jsonPath("$.content[0].numeroOrdre").value("ORD-12345"))
                 .andExpect(jsonPath("$.content[0].specialite.nom").value("Cardiologie"))
                 .andExpect(jsonPath("$.pageNumber").value(0))
-                .andExpect(jsonPath("$.pageSize").value(10))
+                .andExpect(jsonPath("$.pageSize").value(9))
                 .andExpect(jsonPath("$.totalElements").value(3))
                 .andExpect(jsonPath("$.totalPages").value(1))
                 .andExpect(jsonPath("$.first").value(true))
@@ -119,7 +119,7 @@ class DoctorControllerTest {
         Pageable capturedPageable = pageableCaptor.getValue();
 
         assertThat(capturedPageable.getPageNumber()).isEqualTo(0);
-        assertThat(capturedPageable.getPageSize()).isEqualTo(10);
+        assertThat(capturedPageable.getPageSize()).isEqualTo(9);
         assertThat(capturedPageable.getSort().getOrderFor("nom")).isNotNull();
         assertThat(capturedPageable.getSort().getOrderFor("nom").getDirection()).isEqualTo(Sort.Direction.ASC);
     }
@@ -318,7 +318,7 @@ class DoctorControllerTest {
         PageResponse<DoctorDTO> emptyPageResponse = new PageResponse<>(
                 List.of(),
                 0,
-                10,
+                9,
                 0L,
                 0,
                 true,
@@ -346,7 +346,7 @@ class DoctorControllerTest {
         PageResponse<DoctorDTO> secondPageResponse = new PageResponse<>(
                 mockDoctors.subList(0, 2),  // Simuler la page 2 avec 2 éléments
                 1,      // pageNumber = 1 (deuxième page)
-                10,     // pageSize
+                9,     // pageSize
                 25L,    // totalElements
                 3,      // totalPages
                 false,  // first = false (pas la première page)
@@ -359,7 +359,7 @@ class DoctorControllerTest {
         // When & Then
         mockMvc.perform(get("/doctor/allDoctors")
                         .param("page", "1")
-                        .param("size", "10"))
+                        .param("size", "9"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.pageNumber").value(1))
                 .andExpect(jsonPath("$.totalElements").value(25))

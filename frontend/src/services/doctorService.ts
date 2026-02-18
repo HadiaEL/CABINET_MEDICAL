@@ -26,12 +26,16 @@ interface GetDoctorsParams {
  */
 export const getDoctors = async (params: GetDoctorsParams = {}): Promise<PageResponse<Doctor>> => {
   try {
-    const queryParams = {
+    const queryParams: any = {
       page: params.page || 0,
-      size: params.size || 10,
       sortBy: params.sortBy || 'nom',
       sortDirection: params.sortDirection || 'asc',
     };
+
+    // Only include size if explicitly provided
+    if (params.size !== undefined) {
+      queryParams.size = params.size;
+    }
 
     const response = await apiClient.get<PageResponse<Doctor>>('/doctor/allDoctors', {
       params: queryParams
