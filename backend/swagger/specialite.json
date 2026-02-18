@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Cabinet Médical - Spécialités",
+    "description": "API REST pour la gestion des spécialités médicales du cabinet",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Cabinet Médical Support",
+      "email": "support@cabinetmedical.fr"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Serveur de développement"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Spécialités API",
+      "description": "Opérations liées aux spécialités médicales"
+    }
+  ],
+  "paths": {
+    "/speciality/allSpecialities": {
+      "get": {
+        "tags": ["Spécialités API"],
+        "summary": "Récupérer toutes les spécialités",
+        "description": "Endpoint REST API pour récupérer la liste complète des spécialités médicales triées par nom. Utilisé pour alimenter les listes déroulantes et les filtres.",
+        "operationId": "getAllSpecialities",
+        "responses": {
+          "200": {
+            "description": "Liste des spécialités récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecialityDTO"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "nom": "Cardiologie",
+                    "description": "Spécialiste des maladies cardiovasculaires"
+                  },
+                  {
+                    "id": 2,
+                    "nom": "Dermatologie",
+                    "description": "Spécialiste de la peau"
+                  },
+                  {
+                    "id": 3,
+                    "nom": "Médecine Générale",
+                    "description": "Médecin généraliste pour consultations générales"
+                  },
+                  {
+                    "id": 4,
+                    "nom": "ORL",
+                    "description": "Spécialiste des oreilles, du nez et de la gorge"
+                  },
+                  {
+                    "id": 5,
+                    "nom": "Pédiatrie",
+                    "description": "Spécialiste de la santé des enfants"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "timestamp": "2026-02-18T10:30:00",
+                  "status": 500,
+                  "error": "Internal Server Error",
+                  "message": "Erreur lors de la récupération des spécialités",
+                  "path": "/speciality/allSpecialities"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SpecialityDTO": {
+        "type": "object",
+        "description": "Informations d'une spécialité médicale",
+        "required": ["id", "nom"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Identifiant unique de la spécialité",
+            "example": 1
+          },
+          "nom": {
+            "type": "string",
+            "description": "Nom de la spécialité",
+            "example": "Cardiologie"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description de la spécialité",
+            "example": "Spécialiste des maladies cardiovasculaires"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Réponse d'erreur standard",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de l'erreur"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Code HTTP de l'erreur"
+          },
+          "error": {
+            "type": "string",
+            "description": "Type d'erreur"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message d'erreur détaillé"
+          },
+          "path": {
+            "type": "string",
+            "description": "Chemin de l'endpoint qui a généré l'erreur"
+          }
+        }
+      }
+    }
+  }
+}
+

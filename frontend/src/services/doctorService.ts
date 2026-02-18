@@ -1,14 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
 import { Doctor, PageResponse } from '../types';
-
-const API_BASE_URL = 'http://localhost:8080';
-
-const apiClient: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import apiClient from './apiClient';
 
 interface GetDoctorsParams {
   page?: number;

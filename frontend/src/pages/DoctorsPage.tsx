@@ -2,7 +2,9 @@ import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getDoctors } from '../services/doctorService';
+import { getAllSpecialities } from '../services/specialityService';
 import DoctorCard from '../components/DoctorCard';
+import { Specialite } from '../types';
 import '../styles/DoctorsPage.css';
 
 interface Doctor {
@@ -33,9 +35,23 @@ const DoctorsPage: React.FC = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedSpeciality, setSelectedSpeciality] = useState<string>('');
+  const [specialities, setSpecialities] = useState<Specialite[]>([]);
 
   const { user, logout } = useAuth();
   const history = useHistory();
+
+  // Fetch specialities on mount
+  useEffect(() => {
+    const fetchSpecialities = async () => {
+      try {
+        const data = await getAllSpecialities();
+        setSpecialities(data);
+      } catch (err) {
+        console.error('Erreur lors du chargement des spécialités:', err);
+      }
+    };
+    fetchSpecialities();
+  }, []);
 
   useEffect(() => {
     fetchDoctors();
@@ -115,11 +131,11 @@ const DoctorsPage: React.FC = () => {
               className="speciality-select"
             >
               <option value="">Toutes les spécialités</option>
-              <option value="CARDIOLOGUE">Cardiologue</option>
-              <option value="GENERALISTE">Généraliste</option>
-              <option value="PEDIATRE">Pédiatre</option>
-              <option value="DERMATOLOGUE">Dermatologue</option>
-              <option value="ORL">ORL</option>
+              {specialities.map((specialite) => (
+                <option key={specialite.id} value={specialite.nom}>
+                  {specialite.nom}
+                </option>
+              ))}
             </select>
             <button type="submit" className="search-button">
               Rechercher
